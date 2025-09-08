@@ -1,0 +1,34 @@
+//Realiza un programa que nos diga la longitud de un string, del cual conoces la dirección donde inicia, y termina cuando
+//encuentra el NULL en el contenido de memoria; asume que el string está en ASCII.
+LOAD PTR        
+STORE DIRa      // DIRa = dirección inicial del string
+
+loop, LOADI DIRa    
+      SKIPCOND 400    // ¿es 0? → fin del string
+      JUMP Continua
+      HALT
+
+Continua, LOAD cont
+          ADD ONE
+          STORE cont
+
+          LOADI DIRa   // cargar carácter actual
+          OUTPUt
+
+          LOAD DIRa    // avanzar puntero al siguiente carácter
+          ADD ONE
+          STORE DIRa
+
+          JUMP loop
+
+
+
+cont, DEC 0
+ONE, DEC 1
+PTR, ADR STRING
+DIRa, DEC 0
+STRING, HEX 4D
+		HEX 4F
+		HEX 4D
+		HEX 4F
+		HEX 00 //NULL

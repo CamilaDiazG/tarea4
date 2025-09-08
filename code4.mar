@@ -1,0 +1,95 @@
+// Invierte [78, 90, 50, 45]  [45, 50, 90, 78]
+
+// Guardar punteros originales
+load PTR
+store PTRR
+load PTR2
+store PTR2R
+
+// Buscar el final del array (45)
+loop,loadi PTR
+    subt index    // Buscar el valor 45
+    SkipCond 0C00
+    jump OUT
+    load PTR
+    add ONE
+    store PTR
+    jump loop
+
+// Copiar elementos en orden inverso al array temporal
+OUT,load PTR
+    loadi PTR
+
+loop2,loadi PTR     // Tomar elemento actual
+    storei PTR2   // Guardarlo en array temporal
+    load PTR
+    subt ONE      // PTR va hacia atras
+    store PTR
+    load PTR2
+    add ONE       // PTR2 va hacia adelante
+    store PTR2
+    loadi PTR2
+    subt zero
+    SkipCond 400
+    jump loop2
+
+// Restaurar punteros originales
+load PTR2R
+store PTR2
+load PTRR
+store PTR
+
+// Copiar array invertido de vuelta al original
+loopinv,load PTR2
+    loadi PTR2
+    storei PTR    // Sobrescribir array original
+    load PTR
+    add ONE
+    store PTR
+    load PTR2
+    add ONE
+    store PTR2
+    load cuatro
+    subt ONE
+    store cuatro
+    SkipCond 400
+    jump loopinv
+
+// Mostrar resultado invertido
+load PTRR
+store PTR
+
+loopcheck, loadi PTR
+    output
+    load PTR
+    add ONE
+    store PTR
+    load Four
+    subt ONE
+    store Four
+    SkipCond 400
+    jump loopcheck
+halt
+
+// Datos
+zero,     DEC 78   // Primer valor para comparación
+index,    DEC 45   // Último valor a buscar
+cuatro,   DEC 4
+Four,     DEC 4
+ONE,      DEC 1
+
+PTR,      adr lista
+PTRR,     DEC 0
+
+lista,   DEC 78   
+          DEC 90
+          DEC 50
+          DEC 45
+
+PTR2,     adr listaInv
+PTR2R,    DEC 0
+
+listaInv, DEC 0    
+          DEC 0
+          DEC 0
+          DEC 0

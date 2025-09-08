@@ -1,0 +1,44 @@
+// Realiza un programa que tome la primera localidad de memoria de una secuencia de 6 números,
+//llenando las restantes cinco con en valor de la anterior más uno.; la idea es tener la sumatoria de los numeros en cada una de las casillas consecuentes.
+
+Loop,Load N
+    Subt ONE
+    Store N
+    SkipCond 800     // Si contador = 0, ir a Sumatoria
+    Jump Sumatoria
+    
+    LoadI PTR        // Procesar numero actual
+    Add sum
+    Store sum
+    
+    LoadI PTR
+    Output
+    Store num
+    
+    Load PTR         // Avanzar al siguiente elemento
+    Add ONE
+    Store PTR
+    
+    Load num         // Generar siguiente numero (actual + 1)
+    Add ONE
+    StoreI PTR
+    
+    Jump Loop
+
+Sumatoria,Load sum
+    Output          
+    Halt
+
+// Datos
+sum,       DEC 0
+N,         DEC 6     // 6 numeros a procesar
+num,       DEC 0
+ONE,       DEC 1
+PTR,       ADR secuencia
+
+secuencia, DEC 1     
+           DEC 0
+           DEC 0
+           DEC 0
+           DEC 0
+           DEC 0

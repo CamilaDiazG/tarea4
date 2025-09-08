@@ -1,0 +1,32 @@
+Load PTR
+Store DIRa      // puntero al inicio
+
+loop, LoadI DIRa
+      Skipcond 400     // salta
+      Jump imprime     // si NO es 0 → viene aquí
+      Jump end         // si SÍ es 0 → cae aquí
+
+imprime, Output
+         Load DIRa
+         Add ONE
+         Store DIRa
+         Jump loop
+
+end, Halt
+
+PTR,  ADR MATRICULA  
+DIRa, DEC 0
+ONE,  DEC 1
+
+MATRICULA, DEC 65 //a  
+           DEC 48   //0
+           DEC 49   //1
+           DEC 54   //6
+           DEC 52   //4
+           DEC 55   //7
+           DEC 50   //2
+           DEC 53   //5
+           DEC 48   //0   
+           DEC 0    // NULL fin
+
+           

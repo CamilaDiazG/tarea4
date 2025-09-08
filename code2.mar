@@ -1,0 +1,50 @@
+Main, Load TWO
+Store factor_1
+Load a
+Store factor_2
+JnS multiplicacion
+Load THREE
+Store factor_1
+Load b
+Store factor_2
+Clear
+Store mult
+JnS multiplicacion
+Load FOUR
+Store factor_1
+Load c
+Store factor_2
+Clear
+Store mult
+JnS multiplicacion
+Output
+Halt
+multiplicacion, clear
+loop, Load mult
+Add factor_1
+Store mult
+//Restamos uno al segundo factor
+Load factor_2
+Subt ONE
+Store factor_2
+SkipCond 400
+Jump loop
+Load x
+Subt mult
+Store x
+Jumpi multiplicacion
+//Load mult
+//Output
+//Halt
+//Variables para la multiplicacion
+factor_1, DEC 4
+factor_2, DEC 5
+ONE, DEC 1
+mult, DEC 0
+x, DEC 80
+a, DEC 10
+b, DEC 4
+c, DEC 2
+TWO, DEC 2
+THREE, DEC 3
+FOUR, DEC 4
